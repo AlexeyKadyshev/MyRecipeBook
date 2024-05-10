@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Приятного аппетита:-)</h1>
+<h1>{{ recipe.recipe_name }}</h1>
+        {% if recipe.food_image %}
+        <p><img src="{{recipe.food_image.url}}" alt="Изображение блюда" width="400"></p>
+        {% endif %}
+<h2>{{ recipe.recipe_description }}</h2><p><h3>
+    Ингредиенты: </h3>{{ recipe.ingredients }}</p><p>
+<h3>Что делать: </h3>{{ recipe.stages_preparation}}</p><p><h3>Время
+    приготовления: </h3>{{ recipe.time_preparation }} минут</p>
+<p><h3>Рецептом поделился: </h3>{{ recipe.author }}</p>
+<a href="{% url 'show_categories' %}">Назад к категориям рецептов</a><br><br>
+{% include 'clients_recipes/includes/to_all_recipes.html' %}
+{% include 'clients_recipes/includes/to_index.html' %}
+{% endblock %}

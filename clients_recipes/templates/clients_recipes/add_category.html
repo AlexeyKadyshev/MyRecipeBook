@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Добавьте категорию</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <button type="submit">Добавить</button>
+    </p>
+</form>
+
+{% include 'clients_recipes/includes/to_all_recipes.html' %}
+{% include 'clients_recipes/includes/to_index.html' %}
+{% endblock %}

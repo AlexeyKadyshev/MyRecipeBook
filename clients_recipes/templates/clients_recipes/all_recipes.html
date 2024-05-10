@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Топ рецептов недели от редакции!</h1>
+<a href="{% url 'add_recipe' %}">Добавить свой рецепт</a><br><br>
+<a href="{% url 'show_categories' %}">Смотреть рецепты по категориям</a><br><br>
+<ul>
+    {% for recipe in recipes %}
+    <li>
+        <h2><a href="{% url 'one_recipe' recipe.id %}">{{ recipe.recipe_name }}</a></h2><p>{{ recipe.recipe_description }}</p>
+        {% if recipe.food_image %}
+        <p><img src="{{recipe.food_image.url}}" alt="Изображение блюда" width="300"></p>
+        {% endif %}
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% include 'clients_recipes/includes/to_index.html' %}
+{% endblock %}

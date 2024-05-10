@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Категории блюд</h1>
+{% include 'clients_recipes/includes/to_add_category.html' %}
+<ul>
+    {% for category in categories %}
+    <li>
+        <h2><a href="{% url 'recipe_by_category' category.id %}">{{ category.category_name }}</a></h2>
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% include 'clients_recipes/includes/to_all_recipes.html' %}
+{% include 'clients_recipes/includes/to_index.html' %}
+{% endblock %}

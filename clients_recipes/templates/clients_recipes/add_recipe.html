@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Добавить свой рецепт</h1>
+<a href="{% url 'all_recipes' %}">На главную</a>
+<br>
+<br>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <button type="submit">Опубликовать</button>
+    </p>
+</form>
+<a href="{% url 'recipe_category' %}">Определите свой рецепт в одну из категорий</a><br><br>
+{% include 'clients_recipes/includes/to_all_recipes.html' %}
+{% include 'clients_recipes/includes/to_index.html' %}
+{% endblock %}
