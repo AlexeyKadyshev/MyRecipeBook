@@ -76,7 +76,7 @@ def add_recipe(request):
         form = AddRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('add_recipes')
+            return redirect('add_recipe')
     else:
         form = AddRecipeForm()
     data = {'form': form}
