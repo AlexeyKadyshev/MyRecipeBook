@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from random import choices
+from random import choices, choice
 from django.shortcuts import render, redirect
 
 from clients_recipes.forms import LoginForm, EntranceForm, AddRecipeForm, AddCategoryForm, RecipeCategoryFilterForm
@@ -61,13 +61,26 @@ def entrance(request):
     return render(request, 'clients_recipes/entrance.html', data)
 
 
+# def all_recipes(request):
+#     # Эту же функцию можно использовать для отображения всех рецептов, а не только 5 по условию задания
+#     recipes = Recipes.objects.all()
+#     if recipes:
+#         recipes = choices(recipes, k=5)
+#     # recipes = Recipes.objects.all()            # Для отображения всех рецептов
+#     data = {'recipes': recipes}
+#     return render(request, 'clients_recipes/all_recipes.html', context=data)
+
 def all_recipes(request):
-    # Эту же функцию можно использовать для отображения всех рецептов, а не только 5 по условию задания
     recipes = Recipes.objects.all()
-    if recipes:
-        recipes = choices(recipes, k=5)
-    # recipes = Recipes.objects.all()            # Для отображения всех рецептов
-    data = {'recipes': recipes}
+    if len(recipes) <= 5:
+        data = {'recipes': recipes}
+    else:
+        new_recipes = []
+        while len(new_recipes) < 5:
+            el = choice(recipes)
+            if not el in new_recipes:
+                new_recipes.append(el)
+        data = {'recipes': new_recipes}
     return render(request, 'clients_recipes/all_recipes.html', context=data)
 
 
